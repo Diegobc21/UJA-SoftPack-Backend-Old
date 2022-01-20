@@ -10,7 +10,6 @@
     </parent>
     <groupId>es.ujaen</groupId>
     <artifactId>tfg</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>ujasoftpack</name>
     <description>Backend Trabajo Fin de Grado - Diego Barrales Castillo</description>
     <properties>

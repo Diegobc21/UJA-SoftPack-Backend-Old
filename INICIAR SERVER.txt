@@ -1,1 +1,1 @@
-java -jar target/tfg-0.0.1-SNAPSHOT.jar
+java -jar target/tfg-2.6.2.jar
