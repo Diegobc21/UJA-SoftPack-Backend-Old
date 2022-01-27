@@ -25,7 +25,9 @@ public interface UsuarioService {
     
     List<Usuario> buscarNombre(String nombre);
     
-    Usuario buscarEmail(long id);
+    Usuario getEmail(long id);
+    
+    Usuario buscarEmail(String email);
     
     void add(Usuario usuario);
     

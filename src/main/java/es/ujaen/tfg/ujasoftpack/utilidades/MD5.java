@@ -10,13 +10,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *
+ * Codificador para contraseñas basado en Md5 (no seguro)
  * @author Diego
  */
 public class MD5 {
 
     public MD5() {
-
     }
 
     public static String getMD5(String input) {

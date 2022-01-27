@@ -22,10 +22,12 @@ public interface RepositorioUsuario extends Repository<Usuario, Integer> {
     List<Usuario> buscarIdLista(long id);
 
     Usuario buscarId(long id);
+    
+    Usuario buscarEmail(String email);
 
     List<Usuario> buscarNombre(String nombre);
 
-    Usuario buscarEmail(long id);
+    Usuario getEmail(long id);
 
     void editar(Usuario usuario, Usuario nuevo);
 

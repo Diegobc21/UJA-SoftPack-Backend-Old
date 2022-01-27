@@ -32,9 +32,9 @@ public class RepositorioUsuarioImp implements RepositorioUsuario {
         query = em.createQuery("SELECT e FROM Usuario e", Usuario.class);
         return query.getResultList();
     }
-    
+
     @Override
-    public List<Usuario> buscar(String nombre, long id){
+    public List<Usuario> buscar(String nombre, long id) {
         String Id = Long.toString(id);
         String name = nombre;
         Query query;
@@ -52,9 +52,9 @@ public class RepositorioUsuarioImp implements RepositorioUsuario {
         query.setParameter(1, Id);
         return query.getResultList();
     }
-    
+
     @Override
-    public Usuario buscarId(long id){
+    public Usuario buscarId(long id) {
         return em.find(Usuario.class, id);
     }
 
@@ -70,26 +70,28 @@ public class RepositorioUsuarioImp implements RepositorioUsuario {
             return allUsers;
         }
     }
-    
+
     @Override
-    public Usuario buscarEmail(long id) {
+    public Usuario getEmail(long id) {
         return Optional.ofNullable(em.find(Usuario.class, id)).get();
     }
-    
+
+    @Override
+    public Usuario buscarEmail(String email) {
+        return Optional.ofNullable(em.find(Usuario.class, email)).get();
+    }
+
     @Override
     public void editar(Usuario usuario, Usuario nuevo) {
-        usuario.setNombre(nuevo.getNombre());
-        usuario.setEmail(nuevo.getEmail());
         em.merge(usuario);
+        
         flushAndClear();
     }
 
     @Override
     public void save(Usuario usuario) {
-        String passMD5 = MD5.getMD5(usuario.getPassword());
-        usuario.setPassword(passMD5);
-        usuario.setActivo(false);
         em.persist(usuario);
+
         flushAndClear();
     }
 
@@ -98,7 +100,7 @@ public class RepositorioUsuarioImp implements RepositorioUsuario {
         em.remove(usuario);
         flushAndClear();
     }
-    
+
     @Override
     public void flushAndClear() {
         em.flush();

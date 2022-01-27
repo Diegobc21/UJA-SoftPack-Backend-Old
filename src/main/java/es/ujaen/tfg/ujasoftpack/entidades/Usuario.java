@@ -7,6 +7,9 @@ package es.ujaen.tfg.ujasoftpack.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -18,32 +21,45 @@ import javax.persistence.*;
 public class Usuario implements Serializable {
 
     @Id
-    @Column(name = "id")
+    @NotNull
+    @Column(unique = true, name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank
     @Column(name = "nombre")
     private String nombre;
-
-    @Column(name = "email")
+    
+    @Email
+    @NotNull
+    
+    @Column(unique = true, name = "email")
     private String email;
     
+    @NotNull
     @Column(name = "password")
     private String password;
     
-    @Column(name = "activo")
-    private boolean activo;
+    @Column(name = "online")
+    private boolean online;
+    
+//    @NotNull
+//    @Column(name = "activo")
+//    private boolean activo;
 
     public Usuario(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
-        this.activo = false;
+        this.online = false;
+//        this.activo = false;
     }
+    
     public Usuario(String nombre, String email, String pass) {
         this.nombre = nombre;
         this.email = email;
         this.password = pass;
-        this.activo = false;
+//        this.activo = false;
+        this.online = false;
     }
 
     public Usuario() {
@@ -81,12 +97,20 @@ public class Usuario implements Serializable {
         this.password = password;
     }
     
-    public boolean isActivo() {
-        return activo;
+    public boolean isOnline() {
+        return online;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setOnline(boolean online) {
+        this.online = online;
     }
+
+//    public boolean isActivo() {
+//        return activo;
+//    }
+
+//    public void setActivo(boolean activo) {
+//        this.activo = activo;
+//    }
     
 }

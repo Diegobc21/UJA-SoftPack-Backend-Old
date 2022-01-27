@@ -6,7 +6,9 @@
 package es.ujaen.tfg.ujasoftpack.servicios;
 
 import es.ujaen.tfg.ujasoftpack.entidades.Usuario;
+import es.ujaen.tfg.ujasoftpack.excepciones.EmailDuplicado;
 import es.ujaen.tfg.ujasoftpack.repositorios.RepositorioUsuario;
+import es.ujaen.tfg.ujasoftpack.utilidades.MD5;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,17 +49,32 @@ public class UsuarioServiceImp implements UsuarioService {
     }
     
     @Override
-    public Usuario buscarEmail(long id) {
-        return repositorio.buscarEmail(id);
+    public Usuario getEmail(long id) {
+        return repositorio.getEmail(id);
+    }
+    
+    @Override
+    public Usuario buscarEmail(String email) {
+        return repositorio.buscarEmail(email);
     }
     
     @Override
     public void add(Usuario usuario) {
-        repositorio.save(usuario);
+        usuario.setPassword(MD5.getMD5(usuario.getPassword()));
+        usuario.setOnline(false);
+        
+        try {
+            repositorio.save(usuario);
+        } catch (Exception e) {
+            throw new EmailDuplicado();
+        }
     }
 
     @Override
     public void editar(Usuario usuario, Usuario nuevo) {
+        usuario.setNombre(nuevo.getNombre());
+        usuario.setEmail(nuevo.getEmail());
+        
         repositorio.editar(usuario, nuevo);
     }
 
