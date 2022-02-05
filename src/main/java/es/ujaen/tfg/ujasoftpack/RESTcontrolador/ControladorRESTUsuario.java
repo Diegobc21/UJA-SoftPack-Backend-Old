@@ -77,7 +77,7 @@ public class ControladorRESTUsuario {
         }
         return ResponseEntity.status(HttpStatus.OK).body(servicioUsuario.listar());
     }
-    
+
     /*
      * BUSCAR USUARIO POR EMAIL
      */
@@ -113,9 +113,11 @@ public class ControladorRESTUsuario {
     ResponseEntity editar(@PathVariable("id") long id, @RequestBody Usuario usuario) {
         Usuario u = servicioUsuario.buscarId(id);
 
-        try {
-            servicioUsuario.editar(u, usuario);
-        } catch (Exception e) {
+        if (u != null) {
+            try {
+                servicioUsuario.editar(u, usuario);
+            } catch (Exception e) {
+            }
         }
 
         return ResponseEntity.ok().build();
