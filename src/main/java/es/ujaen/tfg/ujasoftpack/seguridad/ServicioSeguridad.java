@@ -1,6 +1,6 @@
 package es.ujaen.tfg.ujasoftpack.seguridad;
 
-import org.springframework.http.HttpMethod;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
  * @author Diego
  */
 @Service
+@Configuration
 @EnableWebSecurity
 public class ServicioSeguridad extends WebSecurityConfigurerAdapter {
 
@@ -25,7 +26,7 @@ public class ServicioSeguridad extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("admin").roles("ADMIN").password("{noop}admin");
         auth.inMemoryAuthentication()
-                .withUser("usuario").roles("USUARIO").password("{noop}usuario");
+                .withUser("usuario").roles("USUARIO").password("{noop}password");
     }
 
     /**
